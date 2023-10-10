@@ -1,4 +1,4 @@
-# flask-react-login/backend/routes.py
+# flask-react-chat-login/backend/routes.py
 
 from flask import Flask, jsonify, request
 from models.usuario import Usuario, db
@@ -7,7 +7,7 @@ from flask_cors import CORS
 
 from routes.routeCadastro import cadastrar_dados_route
 from routes.routeLogin import login_dados_route
-from routes.routeLogin import logout_dados_route
+from routes.routeLogout import logout_dados_route
 
 class Routes:
     def __init__(self, app):

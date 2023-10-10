@@ -1,4 +1,4 @@
-# flask-react-login/backend/models/usuario.py
+# flask-react-chat-chat-login/backend/models/usuario.py
 
 from models.__init__ import db
 from werkzeug.security import generate_password_hash, check_password_hash

@@ -1,4 +1,4 @@
-# flask-react-login/backend/routes/routeLogin.py
+# flask-react-chat-login/backend/routes/routeLogin.py
 
 from flask import jsonify, request
 from models.usuario import Usuario, db
@@ -17,7 +17,8 @@ def login_dados_route(app):
 
             if user_id:
                 login_user(user_id)
-                return jsonify({"message": "Logado com sucesso"})
+                user_info = {"email": email, "id": user_id, "nome": "a"}  # Substitua isso pelos detalhes reais do usuário
+                print(f'Login bem-sucedido! Usuário: {user_info}')  # Exibe no console
+                return jsonify({"message": "Logado com sucesso", "user_info": user_info})
 
         return jsonify({"error": "Credenciais inválidas"}), 401
-

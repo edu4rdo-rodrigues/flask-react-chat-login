@@ -1,17 +1,59 @@
 // frontend/src/App.jsx
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { socket } from './socket.js';
 import Cadastro from './componenets/Cadastro';
 import Login from './componenets/Login';
+import { ConnectionState } from './componenets/ConnectionState';
+import { Events } from './componenets/Events';
+import { ConnectionManager } from './componenets/ConnectionManager';
+import { MyForm } from './componenets/MyForm';
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
+  const [user, setUser] = useState(null);
+  const [isConnected, setIsConnected] = useState(socket.connected);
+  const [fooEvents, setFooEvents] = useState([]);
+
+  useEffect(() => {
+    function onConnect() {
+      setIsConnected(true);
+      console.log('Conectado ao servidor Socket.io web');
+    }
+
+    function onDisconnect() {
+      setIsConnected(false);
+    }
+
+    function onFooEvent(value) {
+      setFooEvents(previous => [...previous, value]);
+    }
+
+    socket.on('connect', onConnect);
+    socket.on('disconnect', onDisconnect);
+    socket.on('foo', onFooEvent);
+
+    return () => {
+      socket.off('connect', onConnect);
+      socket.off('disconnect', onDisconnect);
+      socket.off('foo', onFooEvent);
+    };
+  }, []);
 
   return (
     <div className="App">
-      {isLogged ? <h1>Você está logado!</h1> : null}
-      <Login setIsLogged={setIsLogged} />
+
+      <Login setIsLogged={setIsLogged} setUser={setUser} />
       <Cadastro />
+      {isLogged ? 
+        <h1>Voce esta logado</h1> :  
+        null
+      }
+      <ConnectionState isConnected={ isConnected } />,
+      <Events events={ fooEvents } />,
+      <ConnectionManager />,
+      <MyForm />
+      
     </div>
   );
 }

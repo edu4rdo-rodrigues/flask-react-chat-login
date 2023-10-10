@@ -1,6 +1,6 @@
 // frontend/src/components/Cadastro.jsx
 
-
+import React from 'react';
 import { useState } from "react";
 
 function Cadastro() {
@@ -19,7 +19,7 @@ function Cadastro() {
     };
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/cadastrar/dados', {
+      const response = await fetch('http://127.0.0.1:8000/cadastrar/dados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

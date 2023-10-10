@@ -1,4 +1,4 @@
-#!/home/rpz/code/flask-react-login/backend/venv/bin/python3
+#!/home/rpz/code/flask-react-chat-login/backend/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

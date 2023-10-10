@@ -1,16 +1,32 @@
-# flask-react-login/backend/main.py
+# flask-react-chat-login/backend/main.py
 
+import argparse
 from flask import Flask, jsonify
 from flask_cors import CORS
 from models.usuario import db
 from routes.routes import Routes
 from flask_migrate import Migrate
 from dbConfig import Config
+from dotenv import load_dotenv
+import os
+
+# Carrega as variáveis de ambiente a partir do arquivo .env
+load_dotenv()
+
+# Crie um objeto ArgumentParser
+parser = argparse.ArgumentParser(description='Run the Flask app with custom port.')
+
+# Adicione um argumento para a porta
+parser.add_argument('--port', type=int, default=5000, help='Port to run the Flask app on')
+
+# Parse os argumentos da linha de comando
+args = parser.parse_args()
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/socket.io/*": {"origins": "http://localhost:3000"}})
 
 
+api_url = os.environ.get("REACT_APP_API_URL")
 
 # Carregue as configurações do objeto Config
 app.config.from_object(Config)
@@ -31,4 +47,6 @@ def handle_cors_error(e):
     return jsonify({"error": "Erro de CORS"}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    #socketio_app = SocketIOApp()  # Crie uma instância da classe SocketIOApp
+    #socketio_app.socketio.run(app, debug=True)
+    app.run(debug=True, port=args.port)

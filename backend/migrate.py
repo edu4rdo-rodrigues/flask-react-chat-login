@@ -1,4 +1,4 @@
-# flask-react-login/backend/migrate.py
+# flask-react-chat-login/backend/migrate.py
 
 from alembic import context
 from sqlalchemy import create_engine

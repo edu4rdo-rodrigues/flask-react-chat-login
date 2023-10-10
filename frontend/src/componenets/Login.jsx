@@ -1,10 +1,11 @@
 // frontend/src/components/Login.jsx
-
 import React, { useState } from 'react';
 
-function Login({ setIsLogged }) {
+function Login({ setIsLogged, setUser }) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+
+  const PORT = process.env.REACT_APP_PORT_BACKEND
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +16,7 @@ function Login({ setIsLogged }) {
     };
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/login', {
+      const response = await fetch(`http://127.0.0.1:${PORT}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -24,9 +25,13 @@ function Login({ setIsLogged }) {
       });
 
       if (response.status === 200) {
+        const result = await response.json();
         // O login foi bem-sucedido, você pode lidar com a resposta aqui.
-        console.log('Login bem-sucedido!');
-        setIsLogged(true); // Define o estado como logado
+        console.log('Login bem-sucedido!', result);
+
+        // Defina o estado como logado e configure as informações do usuário
+        setIsLogged(true);
+        setUser(result.user_info); // Define as informações do usuário no estado
       } else {
         // Lidar com erros de autenticação ou outros problemas.
         console.error('Erro ao fazer login.');
@@ -38,7 +43,7 @@ function Login({ setIsLogged }) {
 
   return (
     <div>
-      <h2>Login</h2>
+      <h2>Login {process.env.REACT_APP_PORT_BACKEND}</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">E-mail:</label>
@@ -65,3 +70,4 @@ function Login({ setIsLogged }) {
 }
 
 export default Login;
+

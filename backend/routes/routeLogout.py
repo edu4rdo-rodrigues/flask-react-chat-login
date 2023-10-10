@@ -1,4 +1,4 @@
-# flask-react-login/backend/routes/routeLogin.py
+# flask-react-chat-login/backend/routes/routeLogin.py
 
 from flask import jsonify
 from models.usuario import Usuario, db
