@@ -1,5 +1,6 @@
 # flask-react-chat-login/backend/main.py
 
+import os
 import argparse
 from flask import Flask, jsonify
 from flask_cors import CORS
@@ -8,7 +9,10 @@ from routes.routes import Routes
 from flask_migrate import Migrate
 from dbConfig import Config
 from dotenv import load_dotenv
-import os
+from varEnv.exportVariables import PYTHON_APP_API_FRONTEND_URL 
+
+
+
 
 # Carrega as variáveis de ambiente a partir do arquivo .env
 load_dotenv()
@@ -23,7 +27,7 @@ parser.add_argument('--port', type=int, default=5000, help='Port to run the Flas
 args = parser.parse_args()
 
 app = Flask(__name__)
-CORS(app, resources={r"/socket.io/*": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/socket.io/*": {"origins": PYTHON_APP_API_FRONTEND_URL}})
 
 
 api_url = os.environ.get("REACT_APP_API_URL")
@@ -49,4 +53,4 @@ def handle_cors_error(e):
 if __name__ == '__main__':
     #socketio_app = SocketIOApp()  # Crie uma instância da classe SocketIOApp
     #socketio_app.socketio.run(app, debug=True)
-    app.run(debug=True, port=args.port)
+    app.run(debug=True, port=8000)

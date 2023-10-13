@@ -1,12 +1,15 @@
 // frontend/src/components/MyForm.js
 
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { socket } from '../socket.js';
 
-export function MyForm() {
+export function MyForm({ isConnected }) {
+
   const [value, setValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+
 
   function onSubmit(event) {
     event.preventDefault();
@@ -21,17 +24,31 @@ export function MyForm() {
   }
 
   return (
-    <form onSubmit={onSubmit}>
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        disabled={isLoading}
-      />
+    <>      
+      {
+        isConnected
+        ?
+        <form onSubmit={onSubmit}>
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          disabled={isLoading}
+        />
 
-      <button type="submit" disabled={isLoading}>
-        Submit
-      </button>
-    </form>
+        <button type="submit" disabled={isLoading}>
+          Submit
+        </button>
+      </form>
+      :
+        null
+      }
+      
+    </>
+    
+        
+        
+    
+    
   );
 }

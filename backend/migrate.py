@@ -1,14 +1,20 @@
 # flask-react-chat-login/backend/migrate.py
-
+import os
 from alembic import context
 from sqlalchemy import create_engine
 from sqlalchemy.ext import context as sa_context
 from sqlalchemy.orm import sessionmaker
 from models.usuario import Usuario  # Importe seus modelos aqui
 from app import db  # Importe sua instância db aqui
+from varEnv.exportVariables import (
+    DATABASE_MYSQL_URL,
+)
+
+
+DATABASE_MYSQL_URL = DATABASE_MYSQL_URL
 
 # Configure o banco de dados
-DATABASE_URL = "mysql://rpz:aves123456@localhost/Login_Flask_DB"
+DATABASE_URL = DATABASE_MYSQL_URL
 
 # Crie uma instância do SQLAlchemy Engine
 engine = create_engine(DATABASE_URL)

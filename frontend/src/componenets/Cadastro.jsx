@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useState } from "react";
+import { api_backend_url } from '../exportVenv/ExportVenv'
 
 function Cadastro() {
   const [nome, setNome] = useState('');
@@ -19,7 +20,7 @@ function Cadastro() {
     };
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/cadastrar/dados', {
+      const response = await fetch(`http://127.0.0.1:8000/cadastrar/dados`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

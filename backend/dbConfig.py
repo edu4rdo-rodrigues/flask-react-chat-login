@@ -11,12 +11,10 @@ class Config:
     # Carrega as variáveis de ambiente a partir do arquivo .env
     load_dotenv()
 
-    USER = os.environ['USER_DB']
-    PASSWORD = os.environ['PASSWORD_DB']
-    DATABASE = os.environ['DB_BACKEND']
+    DATABASE_MYSQL_URL = os.environ['DATABASE_MYSQL_URL']
 
     # URL do banco de dados MySQL
-    SQLALCHEMY_DATABASE_URI = f'mysql://{USER}:{PASSWORD}@localhost/{DATABASE}'
+    SQLALCHEMY_DATABASE_URI = DATABASE_MYSQL_URL
 
     # Desativa o rastreamento de modificações do SQLAlchemy
     SQLALCHEMY_TRACK_MODIFICATIONS = False

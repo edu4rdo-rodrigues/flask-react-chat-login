@@ -1,6 +1,7 @@
 // frontend/src/App.jsx
 
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { socket } from './socket.js';
 import Cadastro from './componenets/Cadastro';
 import Login from './componenets/Login';
@@ -15,6 +16,8 @@ function App() {
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [fooEvents, setFooEvents] = useState([]);
 
+
+
   useEffect(() => {
     function onConnect() {
       setIsConnected(true);
@@ -23,6 +26,7 @@ function App() {
 
     function onDisconnect() {
       setIsConnected(false);
+      console.log('Desconectado ao servidor Socket.io web');
     }
 
     function onFooEvent(value) {
@@ -45,14 +49,34 @@ function App() {
 
       <Login setIsLogged={setIsLogged} setUser={setUser} />
       <Cadastro />
-      {isLogged ? 
+      {
+        isLogged ? 
         <h1>Voce esta logado</h1> :  
         null
       }
       <ConnectionState isConnected={ isConnected } />,
       <Events events={ fooEvents } />,
       <ConnectionManager />,
-      <MyForm />
+
+      {
+        isConnected 
+        ? 
+          <>
+            <h3>Conetadoa ao servidor Sockect</h3> 
+            <MyForm isConnected={isConnected} />
+          </>
+          
+        : 
+          <h3>Desconectado ao servidor Sockect</h3>
+      }
+      {/*
+        isConnected ?
+          <MyForm isConnected={isConnected} />
+          :
+          null
+      */}
+      
+      
       
     </div>
   );
