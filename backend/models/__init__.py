@@ -5,8 +5,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from dotenv import load_dotenv
-from varEnv.exportVariables import (
-    PYTHON_APP_API_FRONTEND_URL, 
+from varEnv.exportVenv import (
+    API_FRONTEND_URL, 
     DATABASE_MYSQL_URL,
 )
 
@@ -26,4 +26,4 @@ app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_MYSQL_URL
 db = SQLAlchemy(app)
 
 # Configuração do CORS para permitir acesso de qualquer origem
-CORS(app, resources={r"/*": {"origins": PYTHON_APP_API_FRONTEND_URL}})
+CORS(app, resources={r"/*": {"origins": API_FRONTEND_URL}})

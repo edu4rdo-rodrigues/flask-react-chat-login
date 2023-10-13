@@ -47,15 +47,21 @@ function App() {
   return (
     <div className="App">
 
-      <Login setIsLogged={setIsLogged} setUser={setUser} />
+      <Login setIsLogged={setIsLogged} setUser={setUser} user={user} />
       <Cadastro />
+      
       {
-        isLogged ? 
-        <h1>Voce esta logado</h1> :  
+        isLogged 
+        ? 
+          <>
+            <h1>Voce esta logado</h1>
+          </>
+        :  
         null
       }
-      <ConnectionState isConnected={ isConnected } />,
+      
       <Events events={ fooEvents } />,
+      <ConnectionState isConnected={ isConnected } />
       <ConnectionManager />,
 
       {

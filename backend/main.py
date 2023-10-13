@@ -9,7 +9,7 @@ from routes.routes import Routes
 from flask_migrate import Migrate
 from dbConfig import Config
 from dotenv import load_dotenv
-from varEnv.exportVariables import PYTHON_APP_API_FRONTEND_URL 
+from varEnv.exportVenv import API_FRONTEND_URL 
 
 
 
@@ -27,7 +27,7 @@ parser.add_argument('--port', type=int, default=5000, help='Port to run the Flas
 args = parser.parse_args()
 
 app = Flask(__name__)
-CORS(app, resources={r"/socket.io/*": {"origins": PYTHON_APP_API_FRONTEND_URL}})
+CORS(app, resources={r"/socket.io/*": {"origins": API_FRONTEND_URL}})
 
 
 api_url = os.environ.get("REACT_APP_API_URL")

@@ -5,8 +5,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from dotenv import load_dotenv
-from varEnv.exportVariables import (
-    PYTHON_APP_API_FRONTEND_URL, 
+from varEnv.exportVenv import (
+    API_FRONTEND_URL, 
 )
 
 
@@ -18,4 +18,4 @@ app = Flask(__name__)
 app.debug = True
 
 # Configuração do CORS para permitir acesso de qualquer origem
-CORS(app, resources={r"/*": {"origins": PYTHON_APP_API_FRONTEND_URL}})
+CORS(app, resources={r"/*": {"origins": API_FRONTEND_URL}})

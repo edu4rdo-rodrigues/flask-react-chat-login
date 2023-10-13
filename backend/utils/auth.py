@@ -3,6 +3,8 @@
 from flask import session
 from models.usuario import Usuario  # Importe a classe de modelo de usuário, ajuste o caminho conforme necessário
 from flask_jwt_extended import get_jwt_identity, verify_jwt_in_request
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 def is_token_valid():
     try:
@@ -11,6 +13,10 @@ def is_token_valid():
         return user_id is not None  # Verifique se o ID do usuário está definido no token
     except Exception:
         return False
+    
+def criar_hash_senha(senha):
+    #Cria um hash da senha fornecida.
+    return generate_password_hash(senha)
 
 def authenticate_user(email, senha):
     # Consulte o banco de dados para encontrar um usuário com o email fornecido

@@ -1,9 +1,8 @@
 // src/utils/socket.js
-import React from 'react';
 import { io } from 'socket.io-client';
-import { api_socket_url } from './exportVenv/ExportVenv';
+import { API_SOCKET_URL } from './varEnv/exportVenv';
 
-export const socket = io(`http://localhost:3000`);
+export const socket = io(`${API_SOCKET_URL}`);
     
 
 

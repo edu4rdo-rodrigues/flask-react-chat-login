@@ -6,7 +6,7 @@ from sqlalchemy.ext import context as sa_context
 from sqlalchemy.orm import sessionmaker
 from models.usuario import Usuario  # Importe seus modelos aqui
 from app import db  # Importe sua instância db aqui
-from varEnv.exportVariables import (
+from backend.varEnv.exportVenv import (
     DATABASE_MYSQL_URL,
 )
 
